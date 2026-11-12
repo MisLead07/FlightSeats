@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FlightSeats – Flight Seat Selection
+
+A responsive flight seat selection and passenger management application built with Next.js, React, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Passenger Management:** Dynamically manage 1–6 passengers and switch between passengers.
+- **Aircraft Configurations:** Supports 3–2 and 2–3–2 seating arrangements.
+- **Interactive Seat Selection:** Assign, replace, and remove seats for individual passengers.
+- **Seat Availability:** Differentiates available, occupied, and passenger-assigned seats.
+- **Dynamic Pricing:** Supports free seats and multiple paid seating categories.
+- **Live Cost Calculation:** Automatically calculates total seat selection charges.
+- **Responsive Interface:** Adapts to different screen sizes.
+
+## Technology Stack
+
+- Next.js (App Router)
+- React.js
+- TypeScript
+- Tailwind CSS
+- Lucide React
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── page.tsx
+│   ├── layout.tsx
+│   └── globals.css
+├── components/
+│   ├── passengers/
+│   │   └── PassengerList.tsx
+│   ├── seats/
+│   │   ├── AircraftLayout.tsx
+│   │   ├── Seat.tsx
+│   │   └── SeatLegend.tsx
+│   └── booking/
+│       └── BookingSummary.tsx
+├── data/
+│   ├── passengers.ts
+│   └── seats.ts
+├── types/
+│   └── index.ts
+└── lib/
+    └── seat-utils.ts
+```
+
+## State Management
+
+The application uses React's built-in state management through `useState` and `useMemo`.
+
+- Passenger assignments and passenger count are maintained in application state.
+- The currently active passenger and aircraft configuration are tracked independently.
+- Seat data is generated according to the selected aircraft configuration.
+- The total seat selection cost is derived from passenger assignments rather than stored separately.
+
+## Seat Assignment Logic
+
+Each passenger can have one assigned seat, identified by a unique seat ID.
+
+The assignment utility validates seat availability and prevents multiple passengers from being assigned the same seat. Assigning another seat to an existing passenger replaces their previous assignment.
+
+Seat removal and reassignment update the passenger state, automatically reflecting changes in the booking summary and total cost.
+
+When switching aircraft configurations, incompatible seat assignments are cleared after user confirmation.
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository:
+
+```bash
+git clone <your-repository-url>
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Data
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project uses mock passenger and aircraft seat data. No backend integration or actual flight booking functionality is implemented.
